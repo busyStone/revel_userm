@@ -1,0 +1,99 @@
+{{set . "title" "Register"}}
+{{append . "moreStyles" "css/register.css"}}
+{{template "header.html" .}}
+
+
+{{if .flash.error}}
+    <div class="errordisp">
+    	{{.flash.error}}
+    </div>
+{{end}}
+
+<form action="{{url "Account.PostRegister"}}" method="POST">
+	{{with $field := field "user.Email" .}}
+		<div class="control-group {{$field.ErrorClass}}">
+		    <label class="control-label" for="{{$field.Id}}">电子邮件</label>
+		    <div class="controls">
+		    	<input type="email" id="{{$field.Id}}" name="{{$field.Name}}" value="{{$field.Flash}}" 
+		    	       placeholder="name@mail.com" pattern="^[0-9a-zA-Z]+@(([0-9a-zA-Z]+)[.])+[a-z]{2,4}$"
+		    	       required 
+		    	/>
+		    </div>
+
+		    {{if $field.Error}}
+		        <span class="help-inline">{{$field.Error}}</span>
+		    {{end}}
+			
+		</div>
+    {{end}}
+
+    {{with $field := field "user.Nickname" .}}
+		<div class="control-group {{$field.ErrorClass}}">
+		    <label class="control-label" for="{{$field.Id}}">昵称</label>
+		    <div class="controls">
+		    	<input type="text" id="{{$field.Id}}" name="{{$field.Name}}" value="{{$field.Flash}}" 
+		    	       placeholder="6~16位字母或数字" pattern="^[a-z0-9_]{6,16}$"
+		    	       required
+		    	/>
+		    </div>
+
+		    {{if $field.Error}}
+		        <span class="help-inline">{{$field.Error}}</span>
+		    {{end}}
+			
+		</div>
+    {{end}}
+
+    {{with $field := field "user.Password" .}}
+		<div class="control-group {{$field.ErrorClass}}">
+		    <label class="control-label" for="{{$field.Id}}">密码</label>
+		    <div class="controls">
+		    	<input type="password" id="{{$field.Id}}" name="{{$field.Name}}" value="{{$field.Flash}}" 
+		    	       pattern="^[\x01-\xfe]{8,20}$"
+		    	       required
+		    	/>
+		    </div>
+
+		    {{if $field.Error}}
+		        <span class="help-inline">{{$field.Error}}</span>
+		    {{end}}
+			
+		</div>
+    {{end}}
+
+    {{with $field := field "user.ConfirmPassword" .}}
+		<div class="control-group {{$field.ErrorClass}}">
+		    <label class="control-label" for="{{$field.Id}}">确认密码</label>
+		    <div class="controls">
+		    	<input type="password" id="{{$field.Id}}" name="{{$field.Name}}" value="{{$field.Flash}}" 
+		    	       pattern="^[\x01-\xfe]{8,20}$"
+		    	       required
+		    	/>
+		    </div>
+
+		    {{if $field.Error}}
+		        <span class="help-inline">{{$field.Error}}</span>
+		    {{end}}
+			
+		</div>
+    {{end}}
+
+    <input type="checkbox" name="agreement" id="checkagree" onclick="ToEnableSubmit()"> 同意协议
+
+    <input type="submit" name="register" class="register" id="tosubmit" value="注册" disabled="disabled"> 
+
+</form>
+
+<script type="text/javascript">
+
+    function ToEnableSubmit() {
+    	if (document.getElementById("checkagree").checked){
+        	document.getElementById("tosubmit").disabled=false
+        }
+        else {
+        	document.getElementById("tosubmit").disabled=true
+        }
+    }
+</script>
+
+{{template "footer.html" .}}

@@ -1,0 +1,33 @@
+{{set . "title" "Home"}}
+{{template "header.html" .}}
+
+{{if .flash.success}}
+    <header class="hero-unit" style="background-color:#A9F16C">
+      <div class="container">
+        <div class="row">
+          <div class="hero-text">
+            <h1>{{.flash.success}}</h1>
+            <p></p>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <a href="/logout">退出登录</a>
+{{else}}
+    <header class="hero-unit" style="background-color:#A9F16C">
+      <div class="container">
+        <div class="row">
+          <div class="hero-text">
+            <h1>{{.flash.error}}</h1>
+            <p></p>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <a href="/register">注册</a>
+    <a href="/">登录</a>
+{{end}}
+
+{{template "footer.html" .}}
