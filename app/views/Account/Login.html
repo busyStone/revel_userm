@@ -11,10 +11,10 @@
 <form action="{{url "Account.PostLogin"}}" method="POST">
 	{{with $field := field "loginuser.Email" .}}
 		<div class="control-group {{$field.ErrorClass}}">
-		    <label class="control-label" for="{{$field.Id}}">电子邮件</label>
+		    <label class="control-label" for="{{$field.Id}}">Email</label>
 		    <div class="controls">
 		    	<input type="email" id="{{$field.Id}}" name="{{$field.Name}}" value="{{$field.Flash}}" 
-		    	       placeholder="name@mail.com" pattern="^[0-9a-zA-Z]+@(([0-9a-zA-Z]+)[.])+[a-z]{2,4}$"
+		    	       placeholder="name@mail.com" pattern="^([\w\.\_]{2,10})@(\w{1,}).([a-z]{2,4})$"
 		    	       required
 		    	/>
 		    </div>
@@ -28,7 +28,7 @@
 
     {{with $field := field "loginuser.Password" .}}
 		<div class="control-group {{$field.ErrorClass}}">
-		    <label class="control-label" for="{{$field.Id}}">密码</label>
+		    <label class="control-label" for="{{$field.Id}}">Password</label>
 		    <div class="controls">
 		    	<input type="text" id="{{$field.Id}}" name="{{$field.Name}}" value="{{$field.Flash}}" 
 		    	       pattern="^[\x01-\xfe]{8,20}$"
@@ -43,9 +43,9 @@
 		</div>
     {{end}}
 
-    <input type="submit" name="login" class="login" id="tologin" value="登 录"> 
+    <input type="submit" name="login" class="login" id="tologin" value="Login"> 
 
-    <a href="{{url "Account.Register"}}">注册</a>
+    <a href="{{url "Account.Register"}}">Register</a>
 
 </form>
 
