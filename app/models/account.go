@@ -39,15 +39,15 @@ func (mu *MockUser) Register() error {
 
 	uc := dal.session.DB(DbName).C(UserCollection)
 
-	// 检查 email、nickname 是否已经被使用
+	// Check email、nickname occupied or not
 	i, _ := uc.Find(bson.M{"email": mu.Email}).Count()
 	if i != 0 {
-		return errors.New("邮箱已被使用！")
+		return errors.New("Email has been occupied!")
 	}
 
 	i, _ = uc.Find(bson.M{"nickname": mu.Nickname}).Count()
 	if i != 0 {
-		return errors.New("用户名已被使用！")
+		return errors.New("Nickname is already taken!")
 	}
 
 	var u User
