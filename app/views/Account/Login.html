@@ -2,9 +2,9 @@
 {{append . "moreStyles" "css/register.css"}}
 {{template "header.html" .}}
 
-{{if .flash.error}}
+{{with .flash.error}}
     <div class="errordisp">
-    	{{.flash.error}}
+    	{{.}}
     </div>
 {{end}}
 

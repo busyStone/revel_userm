@@ -55,6 +55,8 @@ func (c *Account) PostRegister(user *models.MockUser) revel.Result {
 		return c.Redirect((*Account).Register)
 	}
 
+	c.Session["email"] = user.Email
+
 	c.Flash.Success("Register & Login successfully!")
 
 	return c.Redirect((*Home).Index)
@@ -81,6 +83,8 @@ func (c *Account) PostLogin(loginuser *models.LoginUser) revel.Result {
 		c.FlashParams()
 		return c.Redirect((*Account).Login)
 	}
+
+	c.Session["email"] = loginuser.Email
 
 	c.Flash.Success("Login successfully!")
 

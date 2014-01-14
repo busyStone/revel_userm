@@ -2,7 +2,6 @@ package controllers
 
 import (
 	"github.com/robfig/revel"
-	"revel_userm/app/models"
 )
 
 type Home struct {
@@ -11,19 +10,14 @@ type Home struct {
 
 func (c *Home) Index() revel.Result {
 
-	var loginuser models.LoginUser
+	// First to localhost/home the error text can't show
+	// but  c.Flash.Out["error"] has content
 
-	loginuser.Email = c.Session["email"]
-	loginuser.Password = c.Session["password"]
-
-	ok, _ := loginuser.IsRegistered()
-	if ok {
-		c.Flash.Success("已经登录！")
+	if c.Session["email"] != "" {
+		c.Flash.Success("Already logged in!")
 	} else {
-		c.Flash.Error("请先登录或注册！")
+		c.Flash.Error("Please login or register!")
 	}
-
-	c.FlashParams()
 
 	return c.Render()
 }

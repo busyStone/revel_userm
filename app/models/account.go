@@ -6,6 +6,11 @@ import (
 	"labix.org/v2/mgo/bson"
 )
 
+// Todo
+// 1 operate independently of data
+// 2 note db connection problems caused by repeated
+// 3 realized and tested using revmgo
+
 func (u *LoginUser) IsRegistered() (bool, error) {
 	dal, err := NewDal()
 	if err != nil {

@@ -3,9 +3,9 @@
 {{template "header.html" .}}
 
 
-{{if .flash.error}}
+{{with .flash.error}}
     <div class="errordisp">
-    	{{.flash.error}}
+    	{{.}}
     </div>
 {{end}}
 
